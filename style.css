@@ -1,398 +1,128 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// Mobile navigation
+const menuBtn = document.getElementById("menuBtn");
+const navMenu = document.getElementById("navMenu");
+
+menuBtn.addEventListener("click", () => {
+  navMenu.classList.toggle("open");
+  menuBtn.textContent = navMenu.classList.contains("open") ? "✕" : "☰";
+});
+
+document.querySelectorAll("#navMenu a").forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("open");
+    menuBtn.textContent = "☰";
+  }); 
+});
+
+// Typing animation
+const words = ["Web Developer", "Programmer", "Cloud Learner"];
+const typingElement = document.getElementById("typing");
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+function typeEffect() {
+  const currentWord = words[wordIndex];
+
+  if (deleting) {
+    charIndex--;
+  } else {
+    charIndex++;
+  }
+
+  typingElement.textContent = currentWord.substring(0, charIndex);
+
+  let speed = deleting ? 55 : 100;
+
+  if (!deleting && charIndex === currentWord.length) {
+    deleting = true;
+    speed = 1300;
+  } else if (deleting && charIndex === 0) {
+    deleting = false;
+    wordIndex = (wordIndex + 1) % words.length;
+    speed = 400;
+  }
+
+  setTimeout(typeEffect, speed);
 }
 
-html {
-    scroll-behavior: smooth;
+typeEffect();
+
+// Dark / light theme
+const themeToggle = document.getElementById("themeToggle");
+
+if (localStorage.getItem("portfolioTheme") === "light") {
+  document.body.classList.add("light");
+  themeToggle.textContent = "🌙";
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #080f1d;
-    color: #ffffff;
-    line-height: 1.7;
-}
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light");
 
-:root {
-    --cyan: #00d9ff;
-    --dark: #080f1d;
-    --card: #101d30;
-}
+  const isLight = document.body.classList.contains("light");
+  themeToggle.textContent = isLight ? "🌙" : "☀️";
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(8, 15, 29, 0.95);
-    border-bottom: 1px solid #1b3049;
-}
+  localStorage.setItem("portfolioTheme", isLight ? "light" : "dark");
+});
 
-.navbar {
-    max-width: 1150px;
-    margin: auto;
-    padding: 18px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    color: white;
-    font-size: 24px;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-.logo span, .hero h1 span, .section-title span {
-    color: var(--cyan);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--cyan);
-}
-
-.menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.hero {
-    max-width: 1150px;
-    min-height: 590px;
-    margin: auto;
-    padding: 80px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-}
-
-.hero-content {
-    flex: 1;
-}
-
-.welcome, .section-label {
-    color: var(--cyan);
-    letter-spacing: 3px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.hero h1 {
-    font-size: clamp(35px, 5vw, 55px);
-    line-height: 1.3;
-    margin: 15px 0;
-}
-
-.hero h2 {
-    color: #c5d3e5;
-    font-size: 25px;
-}
-
-.intro {
-    color: #a9b7ca;
-    margin: 20px 0;
-    max-width: 500px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-.btn {
-    display: inline-block;
-    background: var(--cyan);
-    color: #06111e;
-    padding: 12px 25px;
-    border-radius: 7px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 20px #00d9ff66;
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--cyan);
-    border: 1px solid var(--cyan);
-}
-
-/* AVATAR */
-.avatar-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 22px;
-}
-
-.avatar-glow {
-    width: 290px;
-    height: 290px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #00d9ff, #173c77, #00d9ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 50px #00d9ff55;
-    animation: float 3s ease-in-out infinite;
-}
-
-.avatar {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #1c4266, #091a32);
-    overflow: hidden;
-}
-
-.avatar-face {
-    position: absolute;
-    z-index: 2;
-    width: 105px;
-    height: 125px;
-    background: #d99a75;
-    border-radius: 45% 45% 48% 48%;
-    top: 58px;
-    left: 78px;
-}
-
-.avatar-hair {
-    position: absolute;
-    z-index: 3;
-    width: 115px;
-    height: 65px;
-    background: #172030;
-    border-radius: 55% 55% 25% 25%;
-    top: 48px;
-    left: 73px;
-}
-
-.eyes {
-    display: flex;
-    justify-content: space-around;
-    position: absolute;
-    top: 52px;
-    left: 22px;
-    width: 62px;
-}
-
-.eyes span {
-    width: 9px;
-    height: 9px;
-    background: #172030;
-    border-radius: 50%;
-}
-
-.nose {
-    position: absolute;
-    top: 65px;
-    left: 49px;
-    width: 7px;
-    height: 13px;
-    background: #bd795b;
-    border-radius: 5px;
-}
-
-.mouth {
-    position: absolute;
-    top: 91px;
-    left: 41px;
-    width: 23px;
-    height: 10px;
-    border-bottom: 3px solid #783e39;
-    border-radius: 50%;
-}
-
-.neck {
-    position: absolute;
-    top: 166px;
-    left: 108px;
-    width: 45px;
-    height: 45px;
-    background: #c98767;
-}
-
-.avatar-shirt {
-    position: absolute;
-    bottom: -45px;
-    left: 38px;
-    width: 185px;
-    height: 115px;
-    background: #111b2d;
-    border: 3px solid var(--cyan);
-    border-radius: 90px 90px 0 0;
-    z-index: 4;
-}
-
-.cloud-text {
-    color: var(--cyan);
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-/* SECTIONS */
-.section {
-    max-width: 1150px;
-    margin: auto;
-    padding: 75px 25px;
-    text-align: center;
-    scroll-margin-top: 75px;
-}
-
-.section-title {
-    font-size: 35px;
-    margin: 10px 0 35px;
-}
-
-.about-card, .contact-card {
-    max-width: 750px;
-    margin: auto;
-    padding: 35px;
-    background: var(--card);
-    border: 1px solid #1d3855;
-    border-radius: 15px;
-    color: #b9c7d8;
-}
-
-.skills-grid, .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.skill-card, .project-card {
-    background: var(--card);
-    padding: 25px;
-    border: 1px solid #1d3855;
-    border-radius: 12px;
-    transition: 0.3s;
-}
-
-.skill-card {
-    color: var(--cyan);
-    font-weight: 700;
-}
-
-.skill-card:hover, .project-card:hover {
-    transform: translateY(-7px);
-    border-color: var(--cyan);
-}
-
-.project-icon {
-    font-size: 38px;
-    margin-bottom: 12px;
-}
-
-.project-card h3 {
-    margin-bottom: 10px;
-}
-
-.project-card p {
-    color: #a9b7ca;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.tag {
-    color: var(--cyan);
-    font-size: 12px;
-}
-
-.contact-card p {
-    margin-bottom: 25px;
-}
-
-footer {
-    text-align: center;
-    padding: 25px;
-    border-top: 1px solid #1b3049;
-    color: #8b9bb0;
-    font-size: 13px;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+// Scroll reveal animation
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
     }
-    50% {
-        transform: translateY(-12px);
-    }
-}
+  });
+}, { threshold: 0.12 });
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 700px) {
-    .menu-btn {
-        display: block;
-    }
+document.querySelectorAll(".reveal").forEach(element => {
+  revealObserver.observe(element);
+});
 
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 65px;
-        left: 0;
-        width: 100%;
-        padding: 25px;
-        background: #101d30;
-        flex-direction: column;
-        text-align: center;
-        gap: 18px;
-    }
+// Scroll progress and back-to-top
+const progressBar = document.getElementById("progressBar");
+const backToTop = document.getElementById("backToTop");
 
-    .nav-links.active {
-        display: flex;
-    }
+window.addEventListener("scroll", () => {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
 
-    .hero {
-        flex-direction: column-reverse;
-        text-align: center;
-        padding-top: 50px;
-    }
+  progressBar.style.width = progress + "%";
+  backToTop.classList.toggle("show", window.scrollY > 400);
+});
 
-    .hero-buttons {
-        justify-content: center;
-    }
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-    .avatar-glow {
-        width: 240px;
-        height: 240px;
-    }
+// Contact form - opens the visitor's email application
+const contactForm = document.getElementById("contactForm");
+const formNote = document.getElementById("formNote");
 
-    .avatar {
-        transform: scale(0.82);
-    }
+contactForm.addEventListener("submit", event => {
+  event.preventDefault();
 
-    .skills-grid, .projects-grid {
-        grid-template-columns: 1fr;
-    }
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
 
-    .section-title {
-        font-size: 29px;
-    }
-}
+  // Replace this with your real email address
+  const yourEmail = "YOUR_EMAIL@example.com";
+
+  if (yourEmail === "YOUR_EMAIL@example.com") {
+    formNote.textContent = "Please configure your email address in script.js first.";
+    return;
+  }
+
+  const subject = encodeURIComponent("Portfolio contact from " + name);
+  const body = encodeURIComponent(
+    "Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message
+  );
+
+  window.location.href =
+    `mailto:${yourEmail}?subject=${subject}&body=${body}`;
+});
+
+// Current year
+document.getElementById("year").textContent = new Date().getFullYear();
