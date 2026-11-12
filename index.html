@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <a href="#home" class="logo">My<span>Portfolio.</span></a>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+            ☰
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <!-- HOME -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="welcome">WELCOME TO MY PORTFOLIO</p>
+            <h1>Hi, I'm <span>Riddhesh</span></h1>
+            <h2>Aspiring Web Developer</h2>
+            <p class="intro">
+                I build modern websites and explore web development
+                and cloud technologies.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">Explore My Work</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+
+        <!-- CSS AVATAR -->
+        <div class="avatar-area">
+            <div class="avatar-glow">
+                <div class="avatar">
+                    <div class="avatar-hair"></div>
+                    <div class="avatar-face">
+                        <div class="eyes">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="nose"></div>
+                        <div class="mouth"></div>
+                    </div>
+                    <div class="neck"></div>
+                    <div class="avatar-shirt"></div>
+                </div>
+            </div>
+            <p class="cloud-text">☁️ Future Cloud Developer</p>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+        <p class="section-label">GET TO KNOW ME</p>
+        <h2 class="section-title">About <span>Me</span></h2>
+        <div class="about-card">
+            <p>
+                Hello! I'm an aspiring developer passionate about
+                technology, programming and building websites.
+                I am continuously learning new skills and working
+                on projects to improve my knowledge.
+            </p>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+        <p class="section-label">WHAT I KNOW</p>
+        <h2 class="section-title">My <span>Skills</span></h2>
+        <div class="skills-grid">
+            <div class="skill-card">HTML</div>
+            <div class="skill-card">CSS</div>
+            <div class="skill-card">JavaScript</div>
+            <div class="skill-card">Python</div>
+            <div class="skill-card">C</div>
+            <div class="skill-card">C++</div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+        <p class="section-label">MY WORK</p>
+        <h2 class="section-title">My <span>Projects</span></h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon">🌐</div>
+                <h3>Personal Portfolio</h3>
+                <p>A responsive personal website built using HTML, CSS and JavaScript.</p>
+                <span class="tag">HTML • CSS • JS</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">☁️</div>
+                <h3>Cloud Learning</h3>
+                <p>Learning cloud computing, AWS and website deployment.</p>
+                <span class="tag">AWS • Cloud</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon">💻</div>
+                <h3>Coming Soon</h3>
+                <p>More interesting projects will be added here.</p>
+                <span class="tag">In Progress</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <p class="section-label">LET'S CONNECT</p>
+        <h2 class="section-title">Contact <span>Me</span></h2>
+        <div class="contact-card">
+            <p>Have a project idea or want to connect? Send me an email.</p>
+            <a href="mailto:yourmail@example.com" class="btn">Send Email ✉️</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Your Name | Built with ❤️ and Code</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
